@@ -1,0 +1,37 @@
+/*
+Donald Ulfig
+CSC 355 Section 601
+Assignment 4
+5/1/2019
+*/
+
+--1
+select employee.first, employee.last, employee.salary from department 
+	inner join employee on employee.dno=department.dno
+	where department.dname='Research' order by employee.salary desc;
+--2
+select count(salary), avg(salary) from employee 
+	where salary<=100000;
+--3
+select employee.eid, employee.dno from 
+	(employee inner join assignment on employee.eid=assignment.employeeid)
+	inner join project on project.pno= assignment.projectno 
+	where project.pname='Public Relations';
+--4
+select count(employeeid), pno from project 
+	left outer join assignment on project.pno=assignment.projectno 
+	where project.pcity='Chicago' group by pno order by count(employeeid);
+--5
+select max(employee.salary) from 
+	(employee inner join assignment on employee.eid=assignment.employeeid)
+	inner join project on project.pno= assignment.projectno 
+	where project.pname='ProductB';
+--6
+select employeeid, sum(hours) from assignment 
+	group by employeeid having sum(hours)>30;
+--7
+select employee.first, employee.last, employee.eid, dependent.first, dependent.last, dependent.relationship from employee 
+	inner join dependent on employee.eid=dependent.employeeid
+	where dependent.relationship = 'Spouse';
+--8
+select min(age) from dependent;
